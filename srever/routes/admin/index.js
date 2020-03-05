@@ -9,5 +9,10 @@ module.exports = app => {
     res.send(model)
   })
 
+  router.get('/categories', async (req, res) => {
+    const item = await Category.find().limit(10)
+    res.send(item)
+  })
+
   app.use('/admin/api', router)
 }
