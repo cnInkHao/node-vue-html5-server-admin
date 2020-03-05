@@ -1,13 +1,12 @@
 {
-  "name": "server",
+  "name": "srever",
   "version": "1.0.0",
-  "description": "",
+  "description": "king of glory full stack server project",
   "main": "index.js",
   "scripts": {
     "serve": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "author": "haohaoxiansheng",
   "license": "ISC"
 }
