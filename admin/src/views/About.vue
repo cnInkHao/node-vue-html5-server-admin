@@ -14,13 +14,13 @@
 
 <script>
 export default {
-  data(){
+  data() {
     return {
       model: {}
     }
   },
   methods: {
-    async save(){
+    async save() {
       const res = await this.$http.post('categories', this.model)
       this.$router.push('/categories/list')
       this.$message({
