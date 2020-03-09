@@ -32,9 +32,9 @@ export default {
     async save () {
       let res
       if (this.id) {
-        res = await this.$http.put(`categories/${this.id}`, this.model)
+        res = await this.$http.put(`rest/categories/${this.id}`, this.model)
       } else {
-        res = await this.$http.post('categories', this.model)
+        res = await this.$http.post('rest/categories', this.model)
       }
       console.log(res)
 
@@ -45,11 +45,11 @@ export default {
       })
     },
     async fetch () {
-      const { data } = await this.$http.get(`categories/${this.id}`)
+      const { data } = await this.$http.get(`rest/categories/${this.id}`)
       this.model = data
     },
     async fetchParent () {
-      const { data } = await this.$http.get('categories')
+      const { data } = await this.$http.get('rest/categories')
       console.log(data);
       this.perents = data
     }
