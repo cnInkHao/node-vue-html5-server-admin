@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>{{ id ? '编辑' : '新增' }}物品</h1>
-    <el-form @submit.native.prevent="save">
+    <el-form label-width="120px" @submit.native.prevent="save">
       <el-form-item label="名称">
         <el-input v-model="model.name"></el-input>
       </el-form-item>
@@ -63,7 +63,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
