@@ -9,6 +9,8 @@ app.use(cors())
 require('./routes/admin')(app)
 require('./plugins/db')(app)
 
+app.use('/uploads', express.static(__dirname + '/uploads'))
+
 app.listen(3000, () => {
   console.log('http://localhost:3000 server is running');
 })

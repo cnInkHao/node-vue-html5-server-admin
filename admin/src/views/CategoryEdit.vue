@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ id ? '编辑' : '新建' }}分类</h1>
+    <h1>{{ id ? '编辑' : '新增' }}分类</h1>
     <el-form @submit.native.prevent="save">
       <el-form-item>
         <el-select v-model="model.parent">
