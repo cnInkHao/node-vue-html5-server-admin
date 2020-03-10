@@ -29,7 +29,10 @@ module.exports = app => {
   })
 
   app.use('/admin/api/rest/:resource', async (req, res, next) => {
-    const modelName = require('inflection').classify(req.params.resource)
+    const inflection = require('inflection')
+    const modelName = inflection.classify(req.params.resource)
+    console.log(req.params.resource, modelName);
+    
     req.Model = require(`../../models/${modelName}`)
     next()
   }, router)
