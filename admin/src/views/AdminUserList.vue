@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>广告位列表</h1>
+    <h1>分类列表</h1>
     <el-table :data="items">
       <el-table-column
         type="index"
@@ -8,11 +8,11 @@
         min-width="50"
       ></el-table-column>
       <el-table-column prop="_id" label="id"></el-table-column>
-      <el-table-column prop="name" label="分类名称"></el-table-column>
+      <el-table-column prop="userName" label="用户名"></el-table-column>
       <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">
           <el-button
-            @click="$router.push(`/ads/edit/${scope.row._id}`)"
+            @click="$router.push(`/admin_users/edit/${scope.row._id}`)"
             type="text"
             size="small"
             >编辑</el-button
@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     async fetch() {
-      const { data } = await this.$http.get('rest/ads')
+      const { data } = await this.$http.get('rest/admin_users')
       this.items = data
     },
     remove(row) {
@@ -44,7 +44,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(async () => {
-        await this.$http.delete(`rest/ads/${row._id}`)
+        await this.$http.delete(`rest/admin_users/${row._id}`)
         this.$message({
           type: 'success',
           message: '删除成功'
