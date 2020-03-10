@@ -50,7 +50,6 @@ export default {
     },
     async fetchParent () {
       const { data } = await this.$http.get('rest/categories')
-      console.log(data);
       this.perents = data
     }
   },
