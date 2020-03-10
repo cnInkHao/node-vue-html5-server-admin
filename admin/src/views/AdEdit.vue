@@ -14,7 +14,7 @@
         >
           <i class="el-icon-plus"></i>添加广告
         </el-button>
-        <el-row type="flex" style="flex-wrap: wrap">
+        <el-row type="flex" style="flex-wrap: wrap" class="el-row">
           <el-col
             :xs="12"
             :sm="12"
@@ -49,7 +49,7 @@
           </el-col>
         </el-row>
       </el-form-item>
-      <el-form-item style="margin-top: 1rem">
+      <el-form-item>
         <el-button type="primary" native-type="submit">保存</el-button>
       </el-form-item>
     </el-form>
@@ -102,7 +102,10 @@ export default {
 </script>
 
 <style scoped>
-  /deep/ .el-form-item{
-    margin-bottom: 22px;
+.el-row  .el-form-item{
+    margin: 0 0 22px -50px;
   }
+.el-row {
+  margin-top: 22px;
+}
 </style>
