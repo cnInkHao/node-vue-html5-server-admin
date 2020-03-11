@@ -153,3 +153,19 @@ const multer = require('multer')
   })
 ```
 
+#### [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+
+jsonwebtoken是一个跨域认证标准，它的好处就是可以跨域，跨平台。
+
+```shell
+npm install jsonwebtoken
+```
+
+#### app.set()
+
+设置全局变量。给app 应该放在环境配置里面
+
+```javascript
+app.set('secret', 'asdasdasdasdasdsa')
+```
+

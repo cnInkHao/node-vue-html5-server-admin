@@ -3,6 +3,8 @@ const cors = require('cors')
 
 const app = express()
 
+app.set('secret', 'asdasdasdasdasdsa')
+
 app.use(express.json())
 app.use(cors())
 
