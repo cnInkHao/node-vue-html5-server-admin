@@ -1,9 +1,3 @@
-<center>use markdown语法</center>
-
-## 通用CRUD接口
-
-
-
 ## 项目介绍
 
 ## 项目初始化
