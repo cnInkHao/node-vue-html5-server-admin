@@ -3,7 +3,6 @@ module.exports = app => {
   const jwt = require('jsonwebtoken')
   const AdminUser = require('../../models/AdminUser')
 
-
   const router = express.Router({
     mergeParams: true
   })
