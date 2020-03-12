@@ -1,6 +1,12 @@
 module.exports = app => {
   const express = require('express')
-  const router = express.Router()
+  const jwt = require('jsonwebtoken')
+  const AdminUser = require('../../models/AdminUser')
+
+
+  const router = express.Router({
+    mergeParams: true
+  })
 
   router.post('/', async (req, res) => {
     const model = await req.Model.create(req.body)
@@ -19,8 +25,18 @@ module.exports = app => {
     })
   })
 
-  router.get('/', async (req, res) => {
-    const item = await req.Model.find().populate('parent').limit(100)
+  router.get('/', async (req, res, next) => {
+    const token = String(req.headers.authorization || '').split(' ').pop()
+    const { id } = jwt.verify(token, app.get('secret'))
+    req.user = await AdminUser.findById(id)
+    console.log(req.user)
+    await next()
+  }, async (req, res) => {
+    const queryOptions = {}
+    if (req.Model.modelName === 'Category') {
+      queryOptions.populate = 'parent'
+    }
+    const item = await req.Model.find().setOptions(queryOptions).limit(100)
     res.send(item)
   })
   router.get('/:id', async (req, res) => {
@@ -48,7 +64,6 @@ module.exports = app => {
   app.post('/admin/api/login', async (req, res) => {
     const { userName, password } = req.body
     // 1、根据用户名找用户
-    const AdminUser = require('../../models/AdminUser')
     const user = await AdminUser.findOne({ userName }).select('password')
     if (!user) {
       return res.status(422).send({
@@ -63,9 +78,8 @@ module.exports = app => {
       })
     }
     // 3、返回token
-    const jwt = require('jsonwebtoken')
     const token = jwt.sign({ id: user._id }, app.get('secret'))
-    res.send({token})
+    res.send({ token })
   })
 
 }
