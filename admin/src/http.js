@@ -7,7 +7,7 @@ const http = axios.create({
 
 http.interceptors.request.use(config => {
   // Bearer token类型
-  config.headers.Authorization = 'Bearer ' + localStorage.token
+  config.headers.Authorization = 'Bearer ' + (localStorage.token || '')
   return config
 }, error => {
   return Promise.reject(error)
