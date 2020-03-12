@@ -27,10 +27,10 @@ module.exports = app => {
 
   router.get('/', async (req, res, next) => {
     const token = String(req.headers.authorization || '').split(' ').pop()
-    assert(token, 401, '请提供jwt token===【请先登录】')
+    assert(token, 401, '请先登录')
 
     const { id } = jwt.verify(token, app.get('secret'))
-    assert(id, 401, '无效的jwt token===【请先登录】')
+    assert(id, 401, '请先登录')
 
     req.user = await AdminUser.findById(id)
     assert(req.user, 401, '请先登录')
