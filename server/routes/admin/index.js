@@ -25,17 +25,7 @@ module.exports = app => {
     })
   })
 
-  router.get('/', async (req, res, next) => {
-    const token = String(req.headers.authorization || '').split(' ').pop()
-    assert(token, 401, '请先登录')
-
-    const { id } = jwt.verify(token, app.get('secret'))
-    assert(id, 401, '请先登录')
-
-    req.user = await AdminUser.findById(id)
-    assert(req.user, 401, '请先登录')
-    await next()
-  }, async (req, res) => {
+  router.get('/', async (req, res) => {
     const queryOptions = {}
     if (req.Model.modelName === 'Category') {
       queryOptions.populate = 'parent'
@@ -48,27 +38,25 @@ module.exports = app => {
     res.send(model)
   })
 
-  app.use('/admin/api/rest/:resource', async (req, res, next) => {
-    const inflection = require('inflection')
-    const modelName = inflection.classify(req.params.resource)
-    // console.log(req.params.resource, modelName);
+  // 引入中间件
+  const authMiddleware = require('../../middleware/auth')
+  const resourceMiddleware = require('../../middleware/resource')
 
-    req.Model = require(`../../models/${modelName}`)
-    next()
-  }, router)
+  app.use('/admin/api/rest/:resource', authMiddleware(), resourceMiddleware(), router)
 
   const multer = require('multer')
   const upload = multer({ dest: __dirname + '/../../uploads' })
-  app.post('/admin/api/upload', upload.single('file'), (req, res) => {
+  app.post('/admin/api/upload', authMiddleware(), upload.single('file'), (req, res) => {
     const file = req.file
     file.url = `http://localhost:3000/uploads/${file.filename}`
     res.send(file)
   })
+  
 
   app.post('/admin/api/login', async (req, res) => {
     const { userName, password } = req.body
     // 1、根据用户名找用户
-    const user = await AdminUser.findOne({ userName }).select('password')
+    const user = await AdminUser.findOne({ userName }).select('+password')
 
     assert(user, 422, '用户不存在')
 
@@ -82,12 +70,12 @@ module.exports = app => {
     res.send({ token })
   })
 
+  // 错误处理函数
   app.use(async (err, req, res, next) => {
-    // console.log(err);
+    // console.log(err)
     res.status(err.statusCode || 500).send({
       message: err.message
     })
-
   })
 
 }
