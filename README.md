@@ -169,3 +169,19 @@ npm install jsonwebtoken
 app.set('secret', 'asdasdasdasdasdsa')
 ```
 
+### (web)移动端
+
+#### scss 
+
+```shell
+npm install -D sass sass-loader
+```
+
+**注意项目中利用sass编写的工具css 特别的值得学习和借鉴**
+
+#### vue-awesome-swiper
+
+```shell
+npm install vue-awesome-swiper --save
+```
+
