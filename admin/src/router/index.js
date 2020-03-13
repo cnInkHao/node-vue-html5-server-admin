@@ -24,7 +24,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/login', name: 'login', component: Login
+    path: '/login', name: 'login', component: Login, meta: { isLogin: true }
   },
   {
     path: '/',
@@ -60,6 +60,13 @@ const routes = [
 
 const router = new VueRouter({
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (!to.meta.isLogin && !localStorage.token) {
+    next('/login')
+  }
+  next()
 })
 
 export default router

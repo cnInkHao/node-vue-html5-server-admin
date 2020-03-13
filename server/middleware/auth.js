@@ -6,7 +6,6 @@ const AdminUser = require('../models/AdminUser')
 
 module.exports = options => async (req, res, next) => {
   const token = String(req.headers.authorization || '').split(' ').pop()
-  console.log(123123123123123123, token, assert(token, 401, '请先登录'));
   
   assert(token, 401, '请先登录')
 
