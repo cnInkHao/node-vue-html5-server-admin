@@ -28,7 +28,8 @@
             <el-form-item label="图标">
               <el-upload
                 class="avatar-uploader"
-                :action="$http.defaults.baseURL + '/upload'"
+                :action="uploadUrl"
+                :headers="getAuthHeaders()"
                 :show-file-list="false"
                 :on-success="res => $set(item, 'image', res.url)"
               >
@@ -38,7 +39,7 @@
             </el-form-item>
             <el-form-item>
               <el-button
-              style="margin-left: 120px"
+                style="margin-left: 120px"
                 type="danger"
                 size="mini"
                 plain
@@ -102,9 +103,9 @@ export default {
 </script>
 
 <style scoped>
-.el-row  .el-form-item{
-    margin: 0 0 22px -50px;
-  }
+.el-row .el-form-item {
+  margin: 0 0 22px -50px;
+}
 .el-row {
   margin-top: 22px;
 }
