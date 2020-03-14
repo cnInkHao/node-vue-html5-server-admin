@@ -185,3 +185,10 @@ npm install -D sass sass-loader
 npm install vue-awesome-swiper --save
 ```
 
+#### require-all
+
+```shell
+npm i require-all
+```
+
+引入某个人文件夹下面的所有文件
